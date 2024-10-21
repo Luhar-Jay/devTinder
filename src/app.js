@@ -1,40 +1,30 @@
 const express = require("express");
+const connectDB = require("./config/database");
+const User = require("./models/user");
 const app = express();
 
-// Rout handler
-// app.use("/", (req, res) => {
-//   res.send("Hello server!!!!");
-// });
-app.use("/test", (req, res) => {
-  res.send("Testing the server!");
-});
-app.use("/hello/2", (req, res) => {
-  res.send("abracadabra");
-});
-app.get("/user", (req, res) => {
-  console.log(req.query);
-
-  res.send({
-    firstName: "Jay",
-    lastName: "Luhar",
+app.post("/signup", async (req, res) => {
+  const user = new User({
+    firstName: "Sachin",
+    lastName: "Patel",
+    emailId: "sachin@patel.com",
+    password: "sachin@123",
   });
-});
-app.post("/user", (req, res) => {
-  res.send("Data saved Successfully ");
-});
-app.delete("/user", (req, res) => {
-  res.send("Data deleted Successfully ");
-});
-
-// /abcd & /acd it work => in the b is optional
-app.use("/ab?cd", (req, res) => {
-  res.send("ab?cd");
-});
-app.use("/ab*cd", (req, res) => {
-  res.send("ab*cd in  anything in the path /abcd, /abJFHcd, ab123cd");
+  try {
+    await user.save();
+    res.send("User Added successfully!");
+  } catch (error) {
+    res.status(400).send("Error saving the user: " + error.message);
+  }
 });
 
-// Listen to the server
-app.listen(3000, () => {
-  console.log("Setver is successfully listening on port 3000....");
-});
+connectDB()
+  .then(() => {
+    console.log("Database connection established...");
+    app.listen(3000, () => {
+      console.log("Server is successfully listening on port 3000...");
+    });
+  })
+  .catch((err) => {
+    console.error("Database cannot connected...");
+  });

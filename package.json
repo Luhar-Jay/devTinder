@@ -2,7 +2,6 @@
   "name": "devtinder",
   "version": "1.0.0",
   "description": "tinder for devs",
-  
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/app.js"
@@ -14,6 +13,7 @@
   "author": "Jay Luhar",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "mongoose": "^8.7.2"
   }
 }
