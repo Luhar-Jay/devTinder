@@ -13,7 +13,9 @@
   "author": "Jay Luhar",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.21.1",
-    "mongoose": "^8.7.2"
+    "mongoose": "^8.7.2",
+    "validator": "^13.12.0"
   }
 }
